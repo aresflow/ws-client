@@ -2,26 +2,38 @@ import { connectToServer } from './socket-client';
 import './style.css'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
+<div class="chat-box">
+  <div class="header">
     <h2>Websocket - Client</h2>
+  </div>
 
+  <div class="input-section">
     <input placeholder="Json Web Token" type="text" id="jwt-token" />
     <button id="btn-connect">Connect</button>
-
-    <br/>
-    <span id="server-status">Offline</span>
-
-    <ul id="clients-ul"></ul>
-
-    <form id="message-form">
-        <input placeholder="message" type="text" id="message-input" />
-        <button type="submit">Send</button>
-    </form>
-
-    <h3>Messages: </h3>
-    <ul id="messages-ul"></ul>
-
   </div>
+
+  <div class="status">
+    <span id="server-status">Offline</span>
+  </div>
+
+  <div class="client-list">
+    <ul id="clients-ul"></ul>
+  </div>
+
+  <div class="message-form">
+    <form id="message-form">
+      <input placeholder="Message" type="text" id="message-input" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <div class="message-section">
+    <h3>Messages:</h3>
+    <ul id="messages-ul"></ul>
+  </div>
+</div>
+
+
 `
 
 // setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)

@@ -1,5 +1,7 @@
-import { Manager } from "socket.io-client"
-import { Socket } from "socket.io-client";
+import { Manager, Socket } from "socket.io-client"
+
+
+let socket: Socket;
 
 export const connectToServer = (token: string) => {
 
@@ -9,12 +11,14 @@ export const connectToServer = (token: string) => {
             authentication: token
         }
     }); //CON ESTO SE CONECTA AL SERVIDOR
-    const socket = manager.socket('/'); //CON ESTO SE CONECTA AL NAMESPACE RAIZ
 
-    addListeners(socket);
+    socket?.removeAllListeners(); //ESTO SE ENCARGA DE ELIMINAR TODOS LOS EVENTOS ANTERIORES SI ES QUE HAY ALGUNO Y ASI EVITAR QUE SE DUPLIQUEN
+    socket = manager.socket('/'); //CON ESTO SE CONECTA AL NAMESPACE RAIZ
+
+    addListeners();
 }
 
-const addListeners = (socket: Socket) => { //ESTE METODO SE ENCARGA DE ESCUCHAR LOS EVENTOS DEL SERVIDOR Y ACTUALIZAR EL DOM
+const addListeners = () => { //ESTE METODO SE ENCARGA DE ESCUCHAR LOS EVENTOS DEL SERVIDOR Y ACTUALIZAR EL DOM
     const serverStatusLabel = document.querySelector('#server-status')!;
     const clientsUl = document.querySelector('#clients-ul')!;
 
